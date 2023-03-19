@@ -1,0 +1,45 @@
+#include <iostream>
+#include <time.h>
+#include <iomanip>
+
+using namespace std;
+void main(void)
+{
+	int **a;
+	int n, m;
+	setlocale(LC_ALL, "RU");
+	cout << "Количество строк = ";
+	cin >> n;
+	cout << "Количество столбцов = ";
+	cin >> m;
+	a = new int*[n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int[m];
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			a[i][j] = -10 + rand() % 21;
+
+	cout << "\nПолученный массив имеет вид:" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cout << setw(8) << a[i][j];
+		cout << endl << endl;
+	}
+	int* v = new int[m];
+	int S;
+	for (int j = 0; j < m; j++)
+	{
+		S = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (a[i][j] > 0)
+				S += a[i][j];
+		}
+		v[j] = S;
+	}
+	cout << "Cумма положительных элементов в каждом столбце:" << endl;
+	for (int i = 0; i < m; i++)
+		cout << setw(8) << v[i];
+}
